@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
+  //flutter engine and frameworks are fully initialized before your app runs
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(ProviderScope(child: const MyApp()));
