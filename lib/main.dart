@@ -1,4 +1,4 @@
-import 'package:chatapps/pages/login_page.dart';
+import 'package:chatapps/pages/login_or_register.dart';
 import 'package:chatapps/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,7 +19,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeMode,
-      home: LoginPage(),
+      home: LoginOrRegister(),
     );
   }
 }

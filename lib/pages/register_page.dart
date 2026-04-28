@@ -2,19 +2,20 @@ import 'package:chatapps/components/my_sign_button.dart';
 import 'package:chatapps/components/my_text_field.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
+  final TextEditingController confirmPassController = TextEditingController();
 
-  void onSignIn() async {}
+  void onSignUp() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -60,22 +61,30 @@ class _LoginPageState extends State<LoginPage> {
             hintText: 'Password',
             obscureText: true,
           ),
+          //space between
+          SizedBox(height: 10),
+          //confirm password textfield
+          MyTextField(
+            controller: passController,
+            hintText: 'Confirm Password',
+            obscureText: true,
+          ),
 
           //space between
           SizedBox(height: 10),
           //login button
-          MySignButton(buttonText: 'Sign In', onTap: onSignIn),
+          MySignButton(buttonText: 'Sign Up', onTap: onSignUp),
           //space between
           SizedBox(height: 25),
           //register button
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Don\'t have an account? '),
+              Text('Already have an account? '),
               GestureDetector(
                 onTap: widget.onTap,
                 child: Text(
-                  'Register Now',
+                  'Login Now',
                   style: TextStyle(
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
