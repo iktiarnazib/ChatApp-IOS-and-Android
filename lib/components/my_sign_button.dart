@@ -16,9 +16,12 @@ class MySignButton extends StatelessWidget {
       child: Container(
         height: 50,
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 25),
+        padding: EdgeInsets.all(15),
         margin: EdgeInsets.symmetric(horizontal: 25),
-        color: Theme.of(context).colorScheme.primary,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Theme.of(context).colorScheme.secondary,
+        ),
         child: Center(child: Text(buttonText)),
       ),
     );
