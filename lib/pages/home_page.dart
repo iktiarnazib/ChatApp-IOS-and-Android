@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(icon: Icon(Icons.exit_to_app), onPressed: signOut),
         ],
       ),
+      drawer: Drawer(),
       body: Column(
         children: [
           if (errorMessage.isNotEmpty) Center(child: Text(errorMessage)),
@@ -48,3 +49,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+//done till 6:15:00
