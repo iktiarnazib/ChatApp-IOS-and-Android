@@ -38,12 +38,10 @@ class _LoginPageState extends State<LoginPage> {
           //welcome back
           Text(
             'Welcome back, you\'ve been missed',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
 
-          SizedBox(height: 25),
+          SizedBox(height: 20),
 
           //email textfield
           MyTextField(
@@ -62,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
 
           //space between
-          SizedBox(height: 10),
+          SizedBox(height: 25),
           //login button
           MySignButton(buttonText: 'Sign In', onTap: onSignIn),
           //space between
@@ -71,13 +69,17 @@ class _LoginPageState extends State<LoginPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Don\'t have an account? '),
+              Text(
+                'Don\'t have an account? ',
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
               GestureDetector(
                 onTap: widget.onTap,
                 child: Text(
                   'Register Now',
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Theme.of(context).colorScheme.primary,
+                    // color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
