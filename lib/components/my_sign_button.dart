@@ -22,7 +22,7 @@ class MySignButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           color: Theme.of(context).colorScheme.secondary,
         ),
-        child: Center(child: Text(buttonText)),
+        child: Center(child: Text(buttonText, style: TextStyle())),
       ),
     );
   }

@@ -38,13 +38,11 @@ class _RegisterPageState extends State<RegisterPage> {
 
           //welcome back
           Text(
-            'Welcome back, you\'ve been missed',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
+            'Let\'s create an account for you',
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
 
-          SizedBox(height: 25),
+          SizedBox(height: 20),
 
           //email textfield
           MyTextField(
@@ -65,13 +63,13 @@ class _RegisterPageState extends State<RegisterPage> {
           SizedBox(height: 10),
           //confirm password textfield
           MyTextField(
-            controller: passController,
+            controller: confirmPassController,
             hintText: 'Confirm Password',
             obscureText: true,
           ),
 
           //space between
-          SizedBox(height: 10),
+          SizedBox(height: 25),
           //login button
           MySignButton(buttonText: 'Sign Up', onTap: onSignUp),
           //space between
@@ -80,13 +78,17 @@ class _RegisterPageState extends State<RegisterPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Already have an account? '),
+              Text(
+                'Already have an account? ',
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
               GestureDetector(
                 onTap: widget.onTap,
                 child: Text(
                   'Login Now',
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Theme.of(context).colorScheme.primary,
+                    // color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
