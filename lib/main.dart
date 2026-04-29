@@ -1,3 +1,4 @@
+import 'package:chatapps/auth/auth_gate.dart';
 import 'package:chatapps/auth/login_or_register.dart';
 import 'package:chatapps/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  //flutter engine and frameworks are fully initi  alized before your app runs
+  //flutter engine and frameworks are fully initialized before your app runs
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -22,7 +23,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeMode,
-      home: LoginOrRegister(),
+      home: AuthGate(),
     );
   }
 }

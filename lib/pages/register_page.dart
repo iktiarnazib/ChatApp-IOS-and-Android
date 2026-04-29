@@ -1,5 +1,7 @@
+import 'package:chatapps/auth/auth_service.dart';
 import 'package:chatapps/components/my_sign_button.dart';
 import 'package:chatapps/components/my_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -14,8 +16,44 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final TextEditingController confirmPassController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  String errorMessage = '';
+  bool isLoading = false;
 
-  void onSignUp() async {}
+  void onSignUp() async {
+    if (isLoading) return;
+
+    setState(() {
+      isLoading = true;
+    });
+
+    if (passController.text == confirmPassController.text) {
+      try {
+        await AuthService().signUp(
+          emailController.text,
+          passController.text,
+          usernameController.text,
+        );
+      } on FirebaseAuthException catch (e) {
+        if (passController.text.isEmpty || confirmPassController.text.isEmpty) {
+          setState(() {
+            errorMessage = 'Your password field is empty';
+          });
+        } else {
+          setState(() {
+            errorMessage = e.code;
+          });
+        }
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } else {
+      setState(() {
+        errorMessage = 'Current password doesn\'t match with confirm pass';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +81,13 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
 
           SizedBox(height: 25),
-
+          //email textfield
+          MyTextField(
+            controller: usernameController,
+            hintText: 'Username',
+            obscureText: false,
+          ),
+          SizedBox(height: 10),
           //email textfield
           MyTextField(
             controller: emailController,
@@ -67,7 +111,13 @@ class _RegisterPageState extends State<RegisterPage> {
             hintText: 'Confirm Password',
             obscureText: true,
           ),
-
+          if (errorMessage.isNotEmpty)
+            Column(
+              children: [
+                SizedBox(height: 10),
+                Text(errorMessage, style: TextStyle(color: Colors.red)),
+              ],
+            ),
           //space between
           SizedBox(height: 25),
           //login button
