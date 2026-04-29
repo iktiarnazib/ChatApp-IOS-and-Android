@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
 
-          SizedBox(height: 20),
+          SizedBox(height: 25),
 
           //email textfield
           MyTextField(
