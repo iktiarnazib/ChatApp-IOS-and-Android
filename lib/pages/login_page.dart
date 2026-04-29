@@ -1,5 +1,7 @@
+import 'package:chatapps/auth/auth_service.dart';
 import 'package:chatapps/components/my_sign_button.dart';
 import 'package:chatapps/components/my_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,8 +15,58 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
+  String errorMessage = '';
+  bool isLoading = false;
 
-  void onSignIn() async {}
+  //signin method
+  void onSignIn() async {
+    if (isLoading) return;
+    //so it doesn't load again and again until set to false
+    setState(() {
+      isLoading = true;
+    });
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return Center(child: const CircularProgressIndicator());
+      },
+    );
+
+    try {
+      await AuthService().signInWithEmailAndPassword(
+        emailController.text,
+        passController.text,
+      );
+      if (mounted) {
+        Navigator.pop(context);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "invalid-credential") {
+        setState(() {
+          errorMessage = 'Please enter correct email and password';
+        });
+      } else if (e.code == 'user-not-found') {
+        setState(() {
+          errorMessage = 'No User found for this email';
+        });
+      } else if (e.code == 'wrong-password') {
+        setState(() {
+          errorMessage = 'You have typed the wrong password';
+        });
+      } else {
+        setState(() {
+          errorMessage = e.code;
+        });
+      }
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+        Navigator.pop(context);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +110,21 @@ class _LoginPageState extends State<LoginPage> {
             hintText: 'Password',
             obscureText: true,
           ),
+          if (errorMessage.isNotEmpty)
+            Column(
+              children: [
+                SizedBox(height: 10),
+                Text(
+                  'Error: $errorMessage',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ],
+            ),
 
           //space between
           SizedBox(height: 25),
           //login button
-          MySignButton(buttonText: 'Sign In', onTap: onSignIn),
+          MySignButton(buttonText: 'Sign In', onTap: () => onSignIn()),
           //space between
           SizedBox(height: 25),
           //register button
