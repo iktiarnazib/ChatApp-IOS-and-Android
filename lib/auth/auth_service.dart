@@ -30,11 +30,6 @@ class AuthService {
     //enter username
     await userCredential.user!.updateDisplayName(username);
     await userCredential.user!.reload();
-    //returning user credentail
-    userCredential = await auth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
 
     return userCredential;
   }

@@ -22,11 +22,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void onSignUp() async {
     if (isLoading) return;
-
-    setState(() {
-      isLoading = true;
-    });
-
     if (passController.text == confirmPassController.text) {
       try {
         await AuthService().signUp(
@@ -40,13 +35,12 @@ class _RegisterPageState extends State<RegisterPage> {
             errorMessage = 'Your password field is empty';
           });
         } else {
-          setState(() {
-            errorMessage = e.code;
-          });
+          if (mounted) {
+            setState(() {
+              errorMessage = e.code;
+            });
+          }
         }
-        setState(() {
-          isLoading = false;
-        });
       }
     } else {
       setState(() {

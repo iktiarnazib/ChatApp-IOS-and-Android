@@ -10,12 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    setState(() {});
-  }
-
   String errorMessage = '';
   signOut() async {
     try {
@@ -29,7 +23,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Text(FirebaseAuth.instance.currentUser!.displayName ?? 'User'),
+        title: Row(
+          children: [
+            CircleAvatar(child: Icon(Icons.person)),
+            SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                FirebaseAuth.instance.currentUser!.displayName ?? 'User',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(icon: Icon(Icons.exit_to_app), onPressed: signOut),
         ],
