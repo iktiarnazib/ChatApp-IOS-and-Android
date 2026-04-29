@@ -16,15 +16,9 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   String errorMessage = '';
-  bool isLoading = false;
 
   //signin method
   void onSignIn() async {
-    if (isLoading) return;
-    //so it doesn't load again and again until set to false
-    setState(() {
-      isLoading = true;
-    });
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -60,9 +54,6 @@ class _LoginPageState extends State<LoginPage> {
         });
       }
       if (mounted) {
-        setState(() {
-          isLoading = false;
-        });
         Navigator.pop(context);
       }
     }
