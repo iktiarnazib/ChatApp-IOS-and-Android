@@ -1,4 +1,5 @@
-import 'package:chatapps/auth/auth_gate.dart';
+import 'package:chatapps/services/auth/auth_gate.dart';
+import 'package:chatapps/pages/settings_page.dart';
 import 'package:chatapps/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +22,7 @@ class MyApp extends ConsumerWidget {
     final themeMode = ref.watch(themeProvider);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      routes: {'settingsPage': (context) => SettingsPage()},
       theme: themeMode,
       home: AuthGate(),
     );
