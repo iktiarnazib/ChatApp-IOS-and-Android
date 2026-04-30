@@ -1,4 +1,5 @@
-import 'package:chatapps/auth/auth_service.dart';
+import 'package:chatapps/services/auth/auth_service.dart';
+import 'package:chatapps/components/my_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -36,11 +37,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        actions: [
-          IconButton(icon: Icon(Icons.exit_to_app), onPressed: signOut),
-        ],
       ),
-      drawer: Drawer(),
+      drawer: MyDrawer(),
       body: Column(
         children: [
           if (errorMessage.isNotEmpty) Center(child: Text(errorMessage)),
