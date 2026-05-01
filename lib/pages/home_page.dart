@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
     BuildContext context,
   ) {
     //display all users except current users
-    if (userData["Email"] != _authService.getCurrentUser()!.email) {
+    if (userData["email"] != _authService.getCurrentUser()!.email) {
       return UserTile(
         text: userData["email"],
         onTap: () {
