@@ -56,11 +56,11 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         //error
         if (snapshot.hasError) {
-          return const Text('Error');
+          return Center(child: const Text('Error'));
         }
         //leading
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return Center(child: const CircularProgressIndicator());
         }
 
         //return list view.
