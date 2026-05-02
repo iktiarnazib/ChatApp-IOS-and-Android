@@ -22,7 +22,7 @@ class ChatBubbles extends ConsumerWidget {
       decoration: BoxDecoration(
         color: isCurrentUser
             ? (isDark ? Colors.green : Colors.green[400])
-            : (isDark ? Colors.grey.shade800 : Colors.white),
+            : (isDark ? Colors.grey.shade800 : Colors.white70),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(

@@ -19,8 +19,10 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     final isDark = ref.read(themeProvider);
     if (isDark == darkMode) {
       ref.read(themeProvider.notifier).state = lightMode;
+      await prefs.setBool('isDark', false);
     } else {
       ref.read(themeProvider.notifier).state = darkMode;
+      await prefs.setBool('isDark', true);
     }
   }
 
