@@ -80,6 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
             controller: usernameController,
             hintText: 'Username',
             obscureText: false,
+            focusNode: null,
           ),
           SizedBox(height: 10),
           //email textfield
@@ -87,6 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
             controller: emailController,
             hintText: 'Email',
             obscureText: false,
+            focusNode: null,
           ),
 
           SizedBox(height: 10),
@@ -96,6 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
             controller: passController,
             hintText: 'Password',
             obscureText: true,
+            focusNode: null,
           ),
           //space between
           SizedBox(height: 10),
@@ -104,6 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
             controller: confirmPassController,
             hintText: 'Confirm Password',
             obscureText: true,
+            focusNode: null,
           ),
           if (errorMessage.isNotEmpty)
             Column(
