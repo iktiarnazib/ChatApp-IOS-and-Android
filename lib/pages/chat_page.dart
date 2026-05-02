@@ -1,3 +1,4 @@
+import 'package:chatapps/components/chat_bubbles.dart';
 import 'package:chatapps/components/my_text_field.dart';
 import 'package:chatapps/services/auth/auth_service.dart';
 import 'package:chatapps/services/chat/chat_service.dart';
@@ -31,7 +32,11 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(receiverEmail)),
+      appBar: AppBar(
+        title: Text(receiverEmail),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Theme.of(context).colorScheme.primary,
+      ),
       body: Column(
         children: [
           //build message list
@@ -76,7 +81,10 @@ class ChatPage extends StatelessWidget {
     //align messages to right if the sender is the current user, otherwise left
     var alignment = _currentUser ? Alignment.centerRight : Alignment.centerLeft;
 
-    return Container(alignment: alignment, child: Text(data["message"]));
+    return Container(
+      alignment: alignment,
+      child: ChatBubbles(message: data["message"], isCurrentUser: _currentUser),
+    );
   }
 
   //build message input
@@ -111,3 +119,5 @@ class ChatPage extends StatelessWidget {
     );
   }
 }
+
+//finished until 6:41:00
