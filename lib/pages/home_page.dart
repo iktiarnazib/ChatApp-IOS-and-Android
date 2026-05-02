@@ -30,6 +30,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(
+            context,
+          ).colorScheme.primary, // matches your drawer icon color
+        ),
         title: Row(
           children: [
             CircleAvatar(child: Icon(Icons.person)),
@@ -39,6 +44,7 @@ class _HomePageState extends State<HomePage> {
                 FirebaseAuth.instance.currentUser!.displayName ?? 'User',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
             ),
           ],
@@ -101,5 +107,3 @@ class _HomePageState extends State<HomePage> {
     }
   }
 }
-
-//completed until user clickable in the home page and showing username on the top.
