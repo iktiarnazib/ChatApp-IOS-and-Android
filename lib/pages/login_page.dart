@@ -19,22 +19,11 @@ class _LoginPageState extends State<LoginPage> {
 
   //signin method
   void onSignIn() async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return Center(child: const CircularProgressIndicator());
-      },
-    );
-
     try {
       await AuthService().signInWithEmailAndPassword(
         emailController.text,
         passController.text,
       );
-      if (mounted) {
-        Navigator.pop(context);
-      }
     } on FirebaseAuthException catch (e) {
       if (e.code == "invalid-credential") {
         setState(() {
@@ -52,9 +41,6 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {
           errorMessage = e.code;
         });
-      }
-      if (mounted) {
-        Navigator.pop(context);
       }
     }
   }
@@ -91,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
             controller: emailController,
             hintText: 'Email',
             obscureText: false,
+            focusNode: null,
           ),
 
           SizedBox(height: 10),
@@ -100,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
             controller: passController,
             hintText: 'Password',
             obscureText: true,
+            focusNode: null,
           ),
           if (errorMessage.isNotEmpty)
             Column(
