@@ -8,7 +8,13 @@ import 'package:flutter/material.dart';
 class ChatPage extends StatefulWidget {
   final String receiverEmail;
   final String receiverID;
-  ChatPage({super.key, required this.receiverEmail, required this.receiverID});
+  final String userName;
+  ChatPage({
+    super.key,
+    required this.receiverEmail,
+    required this.receiverID,
+    required this.userName,
+  });
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -84,7 +90,7 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         title: Column(
           children: [
-            Text('Receiver:', style: TextStyle(fontSize: 18)),
+            Text(widget.userName, style: TextStyle(fontSize: 18)),
             Text(
               widget.receiverEmail,
               maxLines: 1,

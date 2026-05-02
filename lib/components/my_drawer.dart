@@ -26,12 +26,30 @@ class MyDrawer extends StatelessWidget {
         children: [
           //drawer header (Logo and app name)
           DrawerHeader(
-            child: Icon(
-              Icons.message,
-              size: 40,
-              color: Theme.of(context).colorScheme.primary,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: Icon(
+                    Icons.message,
+                    size: 40,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                Text(
+                  'Only Chat',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 20,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ],
             ),
           ),
+
           //space
           SizedBox(height: 25),
           //chat page

@@ -40,11 +40,26 @@ class _HomePageState extends State<HomePage> {
             CircleAvatar(child: Icon(Icons.person)),
             SizedBox(width: 10),
             Expanded(
-              child: Text(
-                FirebaseAuth.instance.currentUser!.displayName ?? 'User',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    FirebaseAuth.instance.currentUser!.displayName ?? 'User',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    '${_authService.getCurrentUser()!.email}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -70,10 +85,31 @@ class _HomePageState extends State<HomePage> {
         }
 
         //return list view.
-        return ListView(
-          children: snapshot.data!
-              .map<Widget>((userData) => _buildUserListItems(userData, context))
-              .toList(),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              child: Text(
+                'Inbox',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                children: snapshot.data!
+                    .map<Widget>(
+                      (userData) => _buildUserListItems(userData, context),
+                    )
+                    .toList(),
+              ),
+            ),
+          ],
         );
       },
     );
@@ -85,7 +121,8 @@ class _HomePageState extends State<HomePage> {
     BuildContext context,
   ) {
     //display all users except current users
-    if (userData["email"] != _authService.getCurrentUser()!.email) {
+    if (userData["email"].toLowerCase() !=
+        _authService.getCurrentUser()!.email!.toLowerCase()) {
       return UserTile(
         text: userData["email"],
         onTap: () {
@@ -96,6 +133,7 @@ class _HomePageState extends State<HomePage> {
                 return ChatPage(
                   receiverEmail: userData["email"],
                   receiverID: userData["uid"],
+                  userName: userData["username"] ?? "User",
                 );
               },
             ),
