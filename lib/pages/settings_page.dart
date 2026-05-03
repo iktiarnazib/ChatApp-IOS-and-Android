@@ -57,12 +57,22 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("User: ", style: TextStyle(fontSize: 20)),
+              Text(
+                "User: ",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
               Text(
                 widget.userName,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
               ),
             ],
           ),
@@ -96,7 +106,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Dark Mode'),
+                Text(
+                  'Dark Mode',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
                 Switch.adaptive(
                   value: isDark,
                   onChanged: (value) {
