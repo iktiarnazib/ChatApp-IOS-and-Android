@@ -6,7 +6,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
-  const SettingsPage({super.key});
+  final String userName;
+  final String userEmail;
+  final String userID;
+  const SettingsPage({
+    super.key,
+    required this.userName,
+    required this.userEmail,
+    required this.userID,
+  });
 
   @override
   ConsumerState<SettingsPage> createState() => _SettingsPageState();
@@ -42,25 +50,63 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           icon: Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
-        margin: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Dark Mode'),
-            Switch.adaptive(
-              value: isDark,
-              onChanged: (value) {
-                toggleTheme();
-              },
+      body: Column(
+        children: [
+          CircleAvatar(minRadius: 40, child: Icon(Icons.person, size: 60)),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("User: ", style: TextStyle(fontSize: 20)),
+              Text(
+                widget.userName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          Text(
+            "Email: ${widget.userEmail}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 18,
+              color: Theme.of(context).colorScheme.primary,
             ),
-          ],
-        ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            "User ID: ${widget.userID}",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 10,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            margin: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Dark Mode'),
+                Switch.adaptive(
+                  value: isDark,
+                  onChanged: (value) {
+                    toggleTheme();
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -35,7 +35,6 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      routes: {'settingsPage': (context) => SettingsPage()},
       theme: themeMode,
       home: AuthGate(),
     );
