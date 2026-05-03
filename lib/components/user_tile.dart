@@ -27,15 +27,16 @@ class UserTile extends ConsumerWidget {
       title: Text(
         text,
         style: TextStyle(
-          fontWeight: hasUnread ? FontWeight.bold : FontWeight.normal,
+          fontWeight: hasUnread ? FontWeight.w800 : FontWeight.w600,
         ),
       ),
       subtitle: Text(
-        lastMessage.isEmpty ? "No messages yet" : lastMessage,
+        lastMessage.isEmpty ? "Type a message.." : lastMessage,
+
         style: TextStyle(
           fontWeight: themeMode == darkMode
-              ? (hasUnread ? FontWeight.bold : FontWeight.normal)
-              : (hasUnread ? FontWeight.bold : FontWeight.normal),
+              ? (hasUnread ? FontWeight.w800 : FontWeight.normal)
+              : (hasUnread ? FontWeight.w800 : FontWeight.normal),
           color: themeMode == darkMode
               ? (hasUnread ? Colors.white : Colors.grey)
               : (hasUnread ? Colors.black : Colors.grey),
