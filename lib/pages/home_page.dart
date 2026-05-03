@@ -70,6 +70,14 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {});
+            },
+            icon: Icon(Icons.replay_outlined),
+          ),
+        ],
       ),
       drawer: MyDrawer(),
       body: _buildUserName(),
