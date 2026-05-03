@@ -1,9 +1,18 @@
+import 'package:chatapps/pages/settings_page.dart';
 import 'package:chatapps/services/auth/auth_service.dart';
 import 'package:chatapps/components/my_drawer_tile.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer({super.key});
+  final String userEmail;
+  final String userName;
+  final String userID;
+  const MyDrawer({
+    super.key,
+    required this.userName,
+    required this.userEmail,
+    required this.userID,
+  });
 
   void onHomeTap(BuildContext context) {
     Navigator.pop(context);
@@ -11,7 +20,18 @@ class MyDrawer extends StatelessWidget {
 
   void onSettingsTap(BuildContext context) {
     Navigator.pop(context);
-    Navigator.pushNamed(context, 'settingsPage');
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return SettingsPage(
+            userName: userName,
+            userEmail: userEmail,
+            userID: userID,
+          );
+        },
+      ),
+    );
   }
 
   void onSingOut() async {
@@ -35,7 +55,7 @@ class MyDrawer extends StatelessWidget {
                   child: Icon(
                     Icons.message,
                     size: 40,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Colors.green[700],
                   ),
                 ),
                 Text(

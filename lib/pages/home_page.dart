@@ -91,15 +91,22 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              setState(() {});
-            },
-            icon: Icon(Icons.replay_outlined),
+          Tooltip(
+            message: 'Reload',
+            child: IconButton(
+              onPressed: () {
+                setState(() {});
+              },
+              icon: Icon(Icons.replay_outlined),
+            ),
           ),
         ],
       ),
-      drawer: MyDrawer(),
+      drawer: MyDrawer(
+        userName: _authService.getCurrentUser()!.displayName ?? "User",
+        userEmail: _authService.getCurrentUser()!.email!,
+        userID: _authService.getCurrentUser()!.uid,
+      ),
       body: _buildUserName(),
     );
   }
