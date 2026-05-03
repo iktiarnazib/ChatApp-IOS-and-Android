@@ -5,6 +5,8 @@ import 'package:chatapps/components/my_drawer.dart';
 import 'package:chatapps/services/chat/chat_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +17,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String errorMessage = '';
+  StreamSubscription? _chatRoomsSubscription; // ← add this
+
   signOut() async {
     try {
       AuthService().signOut();
@@ -26,7 +30,23 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    setState(() {});
+
+    _listenToChatRooms();
+  }
+
+  void _listenToChatRooms() {
+    _chatRoomsSubscription = FirebaseFirestore.instance
+        .collection("Chat_rooms")
+        .snapshots()
+        .listen((_) {
+          if (mounted) setState(() {}); // ← triggers StreamBuilder to rebuild
+        });
+  }
+
+  @override
+  void dispose() {
+    _chatRoomsSubscription?.cancel(); // ← always cancel subscriptions
+    super.dispose();
   }
 
   final ChatService _chatService = ChatService();
@@ -140,7 +160,7 @@ class _HomePageState extends State<HomePage> {
       final int unreadCount = userData["unreadCount"] ?? 0;
 
       return UserTile(
-        text: userData["email"],
+        text: userData["username"] ?? "User",
         lastMessage: lastMessage,
         unreadCount: unreadCount,
         onTap: () async {
@@ -156,10 +176,12 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           );
+
           // runs AFTER user presses back button
           await _chatService.markAsRead(
             userData["uid"],
           ); // ← mark read on return
+          setState(() {});
         },
       );
     } else {

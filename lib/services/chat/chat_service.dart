@@ -29,7 +29,7 @@ class ChatService {
         final chatRoomDoc = await _firestore
             .collection("Chat_rooms")
             .doc(chatRoomID)
-            .get();
+            .get(const GetOptions(source: Source.server));
 
         if (chatRoomDoc.exists) {
           final chatData = chatRoomDoc.data()!;

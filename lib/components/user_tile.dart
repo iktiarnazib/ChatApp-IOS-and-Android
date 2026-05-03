@@ -1,6 +1,9 @@
+import 'package:chatapps/themes/dark_mode.dart';
+import 'package:chatapps/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserTile extends StatelessWidget {
+class UserTile extends ConsumerWidget {
   final String text;
   final String lastMessage;
   final int unreadCount;
@@ -15,7 +18,8 @@ class UserTile extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
     final bool hasUnread = unreadCount > 0;
 
     return ListTile(
@@ -29,8 +33,12 @@ class UserTile extends StatelessWidget {
       subtitle: Text(
         lastMessage.isEmpty ? "No messages yet" : lastMessage,
         style: TextStyle(
-          fontWeight: hasUnread ? FontWeight.bold : FontWeight.normal,
-          color: hasUnread ? Colors.black : Colors.grey,
+          fontWeight: themeMode == darkMode
+              ? (hasUnread ? FontWeight.bold : FontWeight.normal)
+              : (hasUnread ? FontWeight.bold : FontWeight.normal),
+          color: themeMode == darkMode
+              ? (hasUnread ? Colors.white : Colors.grey)
+              : (hasUnread ? Colors.black : Colors.grey),
         ),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,

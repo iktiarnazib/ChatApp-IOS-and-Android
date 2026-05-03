@@ -39,9 +39,9 @@ class MyDrawer extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Only Chat',
+                  'JUST CHAT',
                   style: TextStyle(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                     fontSize: 20,
                     color: Theme.of(context).colorScheme.primary,
                   ),
