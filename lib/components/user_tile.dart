@@ -2,31 +2,50 @@ import 'package:flutter/material.dart';
 
 class UserTile extends StatelessWidget {
   final String text;
-  final Function()? onTap;
-  const UserTile({super.key, required this.text, required this.onTap});
+  final String lastMessage;
+  final int unreadCount;
+  final void Function()? onTap;
+
+  const UserTile({
+    super.key,
+    required this.text,
+    required this.lastMessage,
+    required this.unreadCount,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 25),
-        padding: EdgeInsets.all(20),
-        child: Row(
-          children: [
-            //icon
-            Icon(Icons.person),
-            //sizedbox
-            SizedBox(width: 20),
-            //username
-            Text(text),
-          ],
+    final bool hasUnread = unreadCount > 0;
+
+    return ListTile(
+      leading: CircleAvatar(child: Icon(Icons.person)),
+      title: Text(
+        text,
+        style: TextStyle(
+          fontWeight: hasUnread ? FontWeight.bold : FontWeight.normal,
         ),
       ),
+      subtitle: Text(
+        lastMessage.isEmpty ? "No messages yet" : lastMessage,
+        style: TextStyle(
+          fontWeight: hasUnread ? FontWeight.bold : FontWeight.normal,
+          color: hasUnread ? Colors.black : Colors.grey,
+        ),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      trailing: hasUnread
+          ? CircleAvatar(
+              radius: 10,
+              backgroundColor: Colors.green,
+              child: Text(
+                '$unreadCount',
+                style: TextStyle(fontSize: 11, color: Colors.white),
+              ),
+            )
+          : null,
+      onTap: onTap,
     );
   }
 }

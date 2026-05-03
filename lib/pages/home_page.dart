@@ -23,6 +23,12 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    setState(() {});
+  }
+
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
 
@@ -120,24 +126,32 @@ class _HomePageState extends State<HomePage> {
     Map<String, dynamic> userData,
     BuildContext context,
   ) {
-    //display all users except current users
     if (userData["email"].toLowerCase() !=
         _authService.getCurrentUser()!.email!.toLowerCase()) {
+      final String lastMessage = userData["lastMessage"] ?? "";
+      final int unreadCount = userData["unreadCount"] ?? 0;
+
       return UserTile(
         text: userData["email"],
-        onTap: () {
-          Navigator.push(
+        lastMessage: lastMessage,
+        unreadCount: unreadCount,
+        onTap: () async {
+          // ← make async
+          await Navigator.push(
+            // ← await so we know when user comes back
             context,
             MaterialPageRoute(
-              builder: (context) {
-                return ChatPage(
-                  receiverEmail: userData["email"],
-                  receiverID: userData["uid"],
-                  userName: userData["username"] ?? "User",
-                );
-              },
+              builder: (context) => ChatPage(
+                receiverEmail: userData["email"],
+                receiverID: userData["uid"],
+                userName: userData["username"] ?? "User",
+              ),
             ),
           );
+          // runs AFTER user presses back button
+          await _chatService.markAsRead(
+            userData["uid"],
+          ); // ← mark read on return
         },
       );
     } else {
