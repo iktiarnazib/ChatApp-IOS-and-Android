@@ -77,7 +77,10 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         title: Column(
           children: [
-            Text(widget.userName, style: TextStyle(fontSize: 18)),
+            Text(
+              widget.userName,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+            ),
             Text(
               widget.receiverEmail,
               maxLines: 1,
