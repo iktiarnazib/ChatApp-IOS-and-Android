@@ -52,7 +52,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       ),
       body: Column(
         children: [
-          CircleAvatar(minRadius: 40, child: Icon(Icons.person, size: 60)),
+          CircleAvatar(minRadius: 60, child: Icon(Icons.person, size: 60)),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
