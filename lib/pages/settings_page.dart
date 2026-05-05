@@ -1,3 +1,4 @@
+import 'package:chatapps/pages/update_username.dart';
 import 'package:chatapps/themes/dark_mode.dart';
 import 'package:chatapps/themes/light_mode.dart';
 import 'package:chatapps/themes/theme_provider.dart';
@@ -119,6 +120,35 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   },
                 ),
               ],
+            ),
+          ),
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UpdateUsername()),
+            ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 25.0,
+                horizontal: 25,
+              ),
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Update Username',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  Icon(Icons.arrow_right),
+                ],
+              ),
             ),
           ),
         ],
