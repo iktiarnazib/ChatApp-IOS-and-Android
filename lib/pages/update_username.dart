@@ -13,7 +13,20 @@ class _UpdateUsernameState extends State<UpdateUsername> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Update Username')),
-      body: TextFormField(controller: usernameController),
+      body: Column(
+        children: [
+          TextFormField(controller: usernameController),
+          SizedBox(height: 10),
+          OutlinedButton(
+            onPressed: () {},
+
+            style: OutlinedButton.styleFrom(
+              minimumSize: Size(double.infinity, 50),
+            ),
+            child: Text('UPDATE USERNAME'),
+          ),
+        ],
+      ),
     );
   }
 }
