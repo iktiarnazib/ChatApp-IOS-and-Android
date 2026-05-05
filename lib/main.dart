@@ -1,5 +1,4 @@
 import 'package:chatapps/services/auth/auth_gate.dart';
-import 'package:chatapps/pages/settings_page.dart';
 import 'package:chatapps/themes/dark_mode.dart';
 import 'package:chatapps/themes/light_mode.dart';
 import 'package:chatapps/themes/theme_provider.dart';
