@@ -14,6 +14,7 @@ class _UpdateUsernameState extends State<UpdateUsername> {
     return Scaffold(
       appBar: AppBar(title: Text('Update Username')),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextFormField(controller: usernameController),
           SizedBox(height: 10),
