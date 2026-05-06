@@ -24,11 +24,14 @@ class _UpdateUsernameState extends State<UpdateUsername> {
       if (FirebaseAuth.instance.currentUser == null) return;
       await _auth.updateUsername(usernameController.text);
       await FirebaseAuth.instance.currentUser!.reload();
-      //save user info in a separate folde
+
+      //updating usenrame into the firebase Users storage.
+      //so it is shown if a user changes their name
       FirebaseFirestore.instance
           .collection("Users")
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({"username": usernameController.text});
+
       if (mounted) {
         Navigator.pop(context);
       }
