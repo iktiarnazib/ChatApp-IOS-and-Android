@@ -1,7 +1,9 @@
 import 'package:chatapps/pages/update_username.dart';
+import 'package:chatapps/services/auth/auth_service.dart';
 import 'package:chatapps/themes/dark_mode.dart';
 import 'package:chatapps/themes/light_mode.dart';
 import 'package:chatapps/themes/theme_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +24,8 @@ class SettingsPage extends ConsumerStatefulWidget {
 }
 
 class _SettingsPageState extends ConsumerState<SettingsPage> {
+  final AuthService _auth = AuthService();
+  final TextEditingController usernameController = TextEditingController();
   void toggleTheme() async {
     //initiating shared preference.
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -66,7 +70,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 ),
               ),
               Text(
-                widget.userName,
+                FirebaseAuth.instance.currentUser!.displayName!,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -122,15 +126,18 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               ],
             ),
           ),
+
           GestureDetector(
             onTap: () async {
               await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => UpdateUsername()),
+                MaterialPageRoute(
+                  builder: (context) =>
+                      UpdateUsername(usernameController: usernameController),
+                ),
               );
               setState(() {});
             },
-
             child: Container(
               padding: const EdgeInsets.symmetric(
                 vertical: 25.0,
