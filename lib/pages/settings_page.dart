@@ -123,10 +123,14 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
             ),
           ),
           GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => UpdateUsername()),
-            ),
+            onTap: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UpdateUsername()),
+              );
+              setState(() {});
+            },
+
             child: Container(
               padding: const EdgeInsets.symmetric(
                 vertical: 25.0,
