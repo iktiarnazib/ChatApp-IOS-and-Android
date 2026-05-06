@@ -1,5 +1,4 @@
 import 'package:chatapps/pages/update_username.dart';
-import 'package:chatapps/services/auth/auth_service.dart';
 import 'package:chatapps/themes/dark_mode.dart';
 import 'package:chatapps/themes/light_mode.dart';
 import 'package:chatapps/themes/theme_provider.dart';
@@ -24,7 +23,6 @@ class SettingsPage extends ConsumerStatefulWidget {
 }
 
 class _SettingsPageState extends ConsumerState<SettingsPage> {
-  final AuthService _auth = AuthService();
   final TextEditingController usernameController = TextEditingController();
   void toggleTheme() async {
     //initiating shared preference.
@@ -131,10 +129,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
             onTap: () async {
               await Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      UpdateUsername(usernameController: usernameController),
-                ),
+                MaterialPageRoute(builder: (context) => UpdateUsername()),
               );
               setState(() {});
             },
