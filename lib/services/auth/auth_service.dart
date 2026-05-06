@@ -61,5 +61,9 @@ class AuthService {
     await auth.signOut();
   }
 
-  //others
+  //update username
+  Future<void> updateUsername(String newUsername) async {
+    await auth.currentUser!.updateDisplayName(newUsername);
+    await auth.currentUser!.reload();
+  }
 }
