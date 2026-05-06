@@ -1,3 +1,5 @@
+import 'package:chatapps/components/my_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UpdateUsername extends StatefulWidget {
@@ -9,6 +11,8 @@ class UpdateUsername extends StatefulWidget {
 
 class _UpdateUsernameState extends State<UpdateUsername> {
   TextEditingController usernameController = TextEditingController();
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,15 +20,23 @@ class _UpdateUsernameState extends State<UpdateUsername> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextFormField(controller: usernameController),
+          MyTextField(
+            controller: usernameController,
+            hintText: 'Type your username',
+            obscureText: false,
+            focusNode: null,
+          ),
           SizedBox(height: 10),
-          OutlinedButton(
-            onPressed: () {},
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8),
+            child: OutlinedButton(
+              onPressed: () {},
 
-            style: OutlinedButton.styleFrom(
-              minimumSize: Size(double.infinity, 50),
+              style: OutlinedButton.styleFrom(
+                minimumSize: Size(double.infinity, 50),
+              ),
+              child: Text('UPDATE USERNAME'),
             ),
-            child: Text('UPDATE USERNAME'),
           ),
         ],
       ),
