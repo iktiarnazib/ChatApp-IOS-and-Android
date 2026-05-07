@@ -15,7 +15,6 @@ class _UpdateUsernameState extends State<UpdateUsername> {
   TextEditingController usernameController = TextEditingController();
 
   final AuthService _auth = AuthService();
-
   String errorMessage = '';
 
   void onUpdateUser() async {
@@ -62,7 +61,6 @@ class _UpdateUsernameState extends State<UpdateUsername> {
           },
           icon: Icon(
             Icons.arrow_back_ios,
-
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
@@ -70,6 +68,11 @@ class _UpdateUsernameState extends State<UpdateUsername> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(
+            'Update Your Username',
+            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
+          ),
+          SizedBox(height: 20),
           MyTextField(
             controller: usernameController,
             hintText: 'Type your new username',
